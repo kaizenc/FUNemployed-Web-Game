@@ -1,83 +1,83 @@
 //Contains actual game functions
 
-var codePause= true;
-
-function Turn(boss){
-	console.log(getJob()); //display job
-	for (p=0;p<players.length;p++){
-	  if (players[p] == boss){ continue; }
-		for (i=0;i<4;i++){
-			console.log(getQual());
-			while(codePause){};
-		}
-	}
-	//increase score
-	winner = "Player1";
-	incScore(winner);
-}
-
-function show(divName){
+function show(divName){ //displays a "main" div in compairson to other divs
 	$("#MainPage").hide();
 	$("#GamePage").hide();
 	$("#ScorePage").hide();
 	$("#" + divName).show();
 }
+function changeForm(){ //Displays correct number of fields for correct number of players
+	var selector = $("#numOfPlayers").val();
+	for(i=0;i<6;i++){
+		if(i<selector){
+			$("input[name='pName" + i + "']").show();
+		}else{
+			$("input[name='pName" + i + "']").hide();
+		}
+	}
+}
 
-function startGame(){
-	numPlayers = $("#numOfPlayers").val();
-	scores = {};
-	for(i=0;i<numPlayers;i++){
+function startGame(){ //Sets up scores dictionary, displays game
+	numPlayers = $("#numOfPlayers").val(); //saves number of players from selection
+	scores = {}; //reset dicitonary
+	currentBoss = 0; //reset boss
+	for(i=0;i<numPlayers;i++){ //Put the players names in the dictionary
 		playername = $("input[name='pName" + i + "']").val();
 		if (playername == ""){			
-			scores["Player" + (i + 1)] = 0;
+			scores["Player " + (i + 1)] = 0;
 		}else{			
 			scores[playername] = 0;
 		}
 	}
-	//player1n = $("input[name='pName1']").val(); //gets playerName
 	show("GamePage");
 	roundStart();
 }
 
-function roundStart(){//Sets up the html
+function roundStart(){ //Sets up the html
 	var bossName = pName(currentBoss);
 	$("#GamePage h1").text("Boss: " + bossName);
 	$("#GamePage h2:first").text("Job: " + getJob());
+
 	var table = $("#pastQuals table");
 	for(i=0;i<numPlayers;i++){
 		if (i==currentBoss){
 			continue;
 		}
-		table.append("<tr><td>" + Object.keys(scores)[i] + ": " + "</td></tr>");
+		table.append("<tr><td>" + pName(i) + ": " + "</td></tr>");
 	}
+
 	if(currentBoss == 0){
 		$("#currentQuals h3").text("Interviewee: " + pName(1));
 	}else{
 		$("#currentQuals h3").text("Interviewee: " + pName(0));
 	}
+
 	$("#currentQuals h2").text(getQual());
 	$("#currentQuals h4").text("");
 }
-function nextQual(){
-	if(qualCounter != 0){
+
+function nextQual(){ //Runs on "Next Qualification" click
+	if(qualCounter != 0){ //Show on previous qualifications
 		$("#currentQuals h4").append(" | " + $("#currentQuals h2").text());
 	}
-	$("#currentQuals h2").text(getQual());
+	$("#currentQuals h2").text(getQual()); //get next qual
 	qualCounter++;
-	if(qualCounter == 4){
+	if(qualCounter == 4){ //If the number of qualifications is reached, change to next employee
 		var button = $("#currentQuals button");
-		button.text("Next Employee");
-		button.attr("onclick", "nextEmployee();");
+		button.text("Next Interviewee");
+		button.attr("onclick", "nextInterviewee();");
 	}
 }
-function nextEmployee(){
-	//Store qualifications in table
-	var temp_quals = $("#currentQuals h4").text().split(" | ");
-	var table_row = $("#pastQuals table tr:nth-child(" + currentPlayer + ")");
-	for(i=1;i<temp_quals.length;i++){
+
+function nextInterviewee(){ //Runs on "Next Employee" click
+	//Stores interviewee's qualifications in table
+	var temp_quals = $("#currentQuals h4").text().split(" | "); //array of current interviewee's quals
+	var table_row = $("#pastQuals table tr:nth-child(" + currentPlayer + ")"); //get table row
+	for(i=1;i<temp_quals.length;i++){ //insert qualifications one by one into table row
 		table_row.append("<td>"+temp_quals[i]+"</td>");
 	}
-	table_row.append("<td>"+$("#currentQuals h2").text()+"</td>");
+	table_row.append("<td>"+$("#currentQuals h2").text()+"</td>"); //insert current qual due to split command lol
+
 	//Reset counter, button, and other stuff
 	$("#currentQuals h4").text("");
 	qualCounter = 0;
@@ -97,7 +97,9 @@ function nextEmployee(){
 	setupPickWinner();
 	$("#pickWinner").show();
 }
-function setupPickWinner(){
+
+function setupPickWinner(){ //Runs when all applicants have interviewed
+	//sets up the html for picking the winner
 	var div = $("#pickWinner");
 	for(i=0;i<numPlayers;i++){
 		if (i==currentBoss){
@@ -114,12 +116,16 @@ function setupPickWinner(){
 		div.append(string);
 	}
 }
-function pickedWinner(winner){
+
+function pickedWinner(winner){ //Runs when a winner is picked
+	//Displays winner text
 	var string = winner + " is the new ";
 	string+=$("#GamePage h2:first").text().slice(5);
 	string+="!";
 	$("#ScorePage h1").text(string);
+	//Increments Score
 	scores[winner]++;
+	//Updates scoretable in ScorePage
 	var scoreTable = $("#ScorePage h2");
 	for(i=numPlayers-1;i>-1;i--){
 		string = "<h3>" + pName(i) + ": " + scores[pName(i)] + "</h3>";
@@ -127,17 +133,8 @@ function pickedWinner(winner){
 	}
 	show("ScorePage");
 }
-function changeForm(){
-	var selector = $("#numOfPlayers").val();
-	for(i=0;i<6;i++){
-		if(i<selector){
-			$("input[name='pName" + i + "']").show();
-		}else{
-			$("input[name='pName" + i + "']").hide();
-		}
-	}
-}
-function softReset(){
+
+function nextRound(){ //Runs on Next Round click
 	currentBoss = nextBoss();
 	$("#ScorePage h3").remove(); //resets scoreboard
 	$("#pickWinner button").remove(); //resets pickWinner
@@ -148,8 +145,8 @@ function softReset(){
 	roundStart();
 	show("GamePage");
 }
-function hardReset(){
-	currentBoss = 0;
+function endGame(){ //Runs on End Game click
+	currentBoss = 0; //resets boss
 	$("#ScorePage h3").remove(); //resets scoreboard
 	$("#pickWinner button").remove(); //resets pickWinner
 	$("#pastQuals table tr").remove(); //resets table rows

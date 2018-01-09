@@ -12,6 +12,7 @@ var currentBoss = 0;
 var currentPlayer = 1; //tracks which player/employee is going up for quals
 var qualCounter = 1;
 
+//Helper Functions
 function getJob(){
 	if(jobs.length === 0){
 		jobs = jobs.concat(jobs_used);
@@ -33,8 +34,8 @@ function getQual(){
 	return result; //returns result
 }
 function nextBoss(){
-	return (currentBoss+1 == numPlayers)?0:currentBoss+1;
+	return (currentBoss+1 == numPlayers)?0:currentBoss+1; // basically cycles through the players properly
 }
 function pName(x){
-	return Object.keys(scores)[x];
+	return Object.keys(scores)[x]; //return dictionary entry using index
 }
