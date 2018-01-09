@@ -148,6 +148,16 @@ function softReset(){
 	roundStart();
 	show("GamePage");
 }
+function hardReset(){
+	currentBoss = 0;
+	$("#ScorePage h3").remove(); //resets scoreboard
+	$("#pickWinner button").remove(); //resets pickWinner
+	$("#pastQuals table tr").remove(); //resets table rows
+	$("#currentQuals").show(); //shows the game
+	$("#pickWinner").hide(); //hides the pick section
+	currentPlayer=1;
+	show("MainPage");
+}
  
 
 
