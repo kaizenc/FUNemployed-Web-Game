@@ -8,7 +8,7 @@ function show(divName){ //displays a "main" div in compairson to other divs
 }
 function changeForm(){ //Displays correct number of fields for correct number of players
 	var selector = $("#numOfPlayers").val();
-	for(i=0;i<6;i++){
+	for(i=0;i<10;i++){
 		if(i<selector){
 			$("input[name='pName" + i + "']").show();
 		}else{
