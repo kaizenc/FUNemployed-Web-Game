@@ -1,0 +1,75 @@
+<html>
+
+<head>
+	<title>FUNemployed</title>
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+	  crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+</head>
+<!-- ***************** -->
+<body>
+<div style="margin:auto; width: 75%; padding-top: 50px">
+
+
+	<div id="MainPage" style="display:inline">
+		<h1>Welcome to FUNemployed</h1>
+		<p>How many players?</p>
+		<select id="numOfPlayers" onchange="changeForm();">
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		  <option value="5">5</option>
+		  <option value="6">6</option>
+		</select><br>
+		<input type="text" name="pName0" placeholder="Player Name 1"><br>
+		<input type="text" name="pName1" placeholder="Player Name 2"><br>
+		<input type="text" name="pName2" placeholder="Player Name 3"><br>
+		<input type="text" name="pName3" placeholder="Player Name 4" style="display:none"><br>
+		<input type="text" name="pName4" placeholder="Player Name 5" style="display:none"><br>
+		<input type="text" name="pName5" placeholder="Player Name 6" style="display:none"><br>
+		<button onclick="startGame();">Start Game</button>
+	</div>
+
+
+	<div id="GamePage" style="display:none">
+		<h1>Boss: Player3</h1>
+		<h2>Job: Janitor</h2>
+		<br>
+
+		<div id="currentQuals">
+			<h3>PlayerName</h3>
+			<h2>Qualification</h2>			
+			<button onclick="nextQual();">Next Qualification</button>
+			<h4>Quals</h4>
+		</div>
+		<div id="pickWinner" style="display: none">
+			<h2>Who's Your New Employee?</h2>
+		</div>
+
+		<br><br>
+		Our Interviewees' Qualifications
+		<div id="pastQuals">
+			<table>
+				
+			</table>
+		</div>
+	</div>
+
+
+	<div id="ScorePage" style="display:none">
+		<h1>Player 1 is the New Janitor!</h1>
+		<h2><u>Current Scores</u></h2>
+		<button onclick="softReset();">Next Round</button><button>End Game</button>
+	</div>
+
+
+</div>
+
+<!-- Scripts and Junk -->
+<script src="vars.js"></script>
+<script src="script.js"></script>
+
+</body>
+
+</html>
