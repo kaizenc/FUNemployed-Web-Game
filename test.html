@@ -1,0 +1,50 @@
+<!-- NOTE: This file is for me to test CSS only-->
+
+<html>
+
+<head>
+	<title>FUNemployed</title>
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+	  crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+	<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
+  crossorigin="anonymous">
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+<!-- ***************** -->
+<body>
+<div id="GamePage" style="display:none; padding-top: 50px">
+	<h1>Employer: Player3</h1>
+	<h2>Wanted: Janitor</h2>
+	<br>
+
+	<div id="currentQuals">
+		<h3>PlayerName</h3>
+		<h2>Qualification</h2>			
+		<button onclick="nextQual();">Next Qualification</button>
+		<h4>Quals</h4>
+	</div>
+	<div id="pickWinner" style="display: none">
+		<h2>Who's Your New Employee?</h2>
+	</div>
+
+	<br><br>
+	Our Interviewees' Qualifications
+	<div id="pastQuals">
+		<table>
+			
+		</table>
+	</div>
+</div>
+
+<!-- Scripts and Junk -->
+<script src="javascript/vars.js"></script>
+<script src="javascript/script.js"></script>
+
+</body>
+
+</html>
