@@ -1,11 +1,5 @@
 //Contains actual game functions
 
-function show(divName){ //displays a "main" div in compairson to other divs
-	$("#MainPage").hide();
-	$("#GamePage").hide();
-	$("#ScorePage").hide();
-	$("#" + divName).show();
-}
 function changeForm(){ //Displays correct number of fields for correct number of players + animations!
 	var selector = $("#numOfPlayers").val();
 	var timeoutCount = 50;
@@ -46,7 +40,7 @@ function roundStart(){ //Sets up the html
 	roundStartAnim();
 	var bossName = pName(currentBoss);
 	$("#GamePage h1").text("Employer: " + bossName);
-	$("#GamePage h2:first").text("Wanted: " + getJob());
+	$("#GamePage h2:first").html("Wanted: <strong>" + getJob() + "</strong>");
 
 	var table = $("#pastQuals table");
 	for(i=0;i<numPlayers;i++){
@@ -75,13 +69,13 @@ function nextQual(){ //Runs on "Next Qualification" click
 	if(qualCounter == 4){ //If the number of qualifications is reached, change to next employee
 		var button = $("#currentQuals button");
 		button.text("Next Applicant");
-		button.attr("onclick", "nextInterviewee();");
+		button.attr("onclick", "nextApplicant();");
 	}
 }
 
-function nextInterviewee(){ //Runs on "Next Employee" click
-	//Stores interviewee's qualifications in table
-	var temp_quals = $("#currentQuals h4").text().split(" | "); //array of current interviewee's quals
+function nextApplicant(){ //Runs on "Next Employee" click
+	//Stores Applicant's qualifications in table
+	var temp_quals = $("#currentQuals h4").text().split(" | "); //array of current Applicant's quals
 	var table_row = $("#pastQuals table tr:nth-child(" + currentPlayer + ")"); //get table row
 	for(i=1;i<temp_quals.length;i++){ //insert qualifications one by one into table row
 		table_row.append("<td>"+temp_quals[i]+"</td>");
@@ -98,14 +92,14 @@ function nextInterviewee(){ //Runs on "Next Employee" click
 	currentPlayer++;
 	//Gets the next qualification (if not finished with turn)
 	if(currentPlayer < numPlayers){
-		$("#currentQuals h3").text("Interviewee: " + pName(currentPlayer));
+		$("#currentQuals h3").text("Applicant: " + pName(currentPlayer));
 		nextQual();
 		return;
 	}
 	//else, show the other thing
-	$("#currentQuals").hide();
+	quickAnimHide("#currentQuals", 'fadeOutLeft');
 	setupPickWinner();
-	$("#pickWinner").show();
+	setTimeout(quickAnim, 950, '#pickWinner', 'fadeInRight');
 }
 
 function setupPickWinner(){ //Runs when all applicants have interviewed
@@ -141,29 +135,35 @@ function pickedWinner(winner){ //Runs when a winner is picked
 		string = "<h3>" + pName(i) + ": " + scores[pName(i)] + "</h3>";
 		scoreTable.after(string);
 	}
-	show("ScorePage");
+	quickAnimHide("#GamePage", 'fadeOutLeft');
+	setTimeout(quickAnim, 1000, '#ScorePage', 'fadeInRight');
 }
 
 function nextRound(){ //Runs on Next Round click
+	quickAnimHide("#ScorePage", 'fadeOutLeft');
+	setTimeout(function(){
+	    $("#ScorePage h3").remove(); //resets scoreboard
+	}, 1000);
 	currentBoss = nextBoss();
-	$("#ScorePage h3").remove(); //resets scoreboard
 	$("#pickWinner button").remove(); //resets pickWinner
 	$("#pastQuals table tr").remove(); //resets table rows
 	$("#currentQuals").show(); //shows the game
 	$("#pickWinner").hide(); //hides the pick section
 	currentPlayer=1;
 	roundStart();
-	show("GamePage");
 }
 function endGame(){ //Runs on End Game click
+	quickAnimHide("#ScorePage", 'fadeOutLeft');
+	setTimeout(function(){
+	    $("#ScorePage h3").remove(); //resets scoreboard
+	}, 1000);
 	currentBoss = 0; //resets boss
-	$("#ScorePage h3").remove(); //resets scoreboard
 	$("#pickWinner button").remove(); //resets pickWinner
 	$("#pastQuals table tr").remove(); //resets table rows
 	$("#currentQuals").show(); //shows the game
 	$("#pickWinner").hide(); //hides the pick section
 	currentPlayer=1;
-	show("MainPage");
+	setTimeout(quickAnim, 1000, '#MainPage', 'fadeInDown');
 }
  
 

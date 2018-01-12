@@ -5,3 +5,10 @@
   text-align:center;
   margin: 0px auto;
 }
+
+#GamePage #currentQuals h2{
+	color: red;
+}
+strong{
+	color: red;
+}

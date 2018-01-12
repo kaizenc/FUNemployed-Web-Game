@@ -69,10 +69,10 @@ function roundStartAnim(){
 	var timeoutCounter = 2100;
 	var timeoutInterval = 500;
 	$("#GamePage").children().each(function () {
-  	if(!$(this).is("h1") && !$(this).is("div#pickWinner")){
-  		setTimeout(quickAnim, timeoutCounter, $(this), "slideInRight");
-  		timeoutCounter+=timeoutInterval;
-  	}
+	  	if(!$(this).is("h1") && !$(this).is("div#pickWinner")){
+	  		setTimeout(quickAnimObj, timeoutCounter, $(this), "slideInRight");
+	  		timeoutCounter+=timeoutInterval;
+	  	}
 	});
 	//
 }
@@ -81,8 +81,15 @@ function roundStartAnim(){
 function quickAnim(selector, animName){
   $(selector).addClass(animName + ' animated').show().one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
     $(this).removeClass(animName + ' animated');
+    $(this).show();
   });
 };
+function quickAnimObj(Obj, animName){
+  Obj.addClass(animName + ' animated').show().one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+    Obj.removeClass(animName + ' animated');
+  });
+};
+
 function quickAnimHide(selector, animName){
   $(selector).addClass(animName + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
   	$(this).hide();
@@ -91,3 +98,4 @@ function quickAnimHide(selector, animName){
 };
 
 animateTitle();
+
