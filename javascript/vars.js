@@ -62,7 +62,22 @@ function animateTitle(){
 	setTimeout(quickAnim, 1200, '#MainPage .startgame', 'zoomIn');
 	setTimeout(quickAnim, 1250, '#MainPage .howPlay', 'zoomIn');
 }
+function roundStartAnim(){
+	setTimeout(quickAnim, 1100, "#GamePage", "slideInDown");
+	$("#GamePage").children().hide();
+	$("#GamePage h1").show();
+	var timeoutCounter = 2100;
+	var timeoutInterval = 500;
+	$("#GamePage").children().each(function () {
+  	if(!$(this).is("h1") && !$(this).is("div#pickWinner")){
+  		setTimeout(quickAnim, timeoutCounter, $(this), "slideInRight");
+  		timeoutCounter+=timeoutInterval;
+  	}
+	});
+	//
+}
 
+//Animate Helper Functions
 function quickAnim(selector, animName){
   $(selector).addClass(animName + ' animated').show().one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
     $(this).removeClass(animName + ' animated');

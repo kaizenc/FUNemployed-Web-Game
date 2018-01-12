@@ -27,7 +27,7 @@ function changeForm(){ //Displays correct number of fields for correct number of
 }
 
 function startGame(){ //Sets up scores dictionary, displays game
-	quickAnimHide("#MainPage", "slideOutLeft");
+	quickAnimHide("#MainPage", "fadeOutLeft");
 	numPlayers = $("#numOfPlayers").val(); //saves number of players from selection
 	scores = {}; //reset dicitonary
 	currentBoss = 0; //reset boss
@@ -39,11 +39,11 @@ function startGame(){ //Sets up scores dictionary, displays game
 			scores[playername] = 0;
 		}
 	}
-	setTimeout(quickAnim, 1000, "#GamePage", "slideInDown");
 	roundStart();
 }
 
 function roundStart(){ //Sets up the html
+	roundStartAnim();
 	var bossName = pName(currentBoss);
 	$("#GamePage h1").text("Employer: " + bossName);
 	$("#GamePage h2:first").text("Wanted: " + getJob());
