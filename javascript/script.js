@@ -57,6 +57,7 @@ function roundStart(){ //Sets up the html
 	}
 
 	$("#currentQuals h2").text(getQual());
+	qualCounter = 1;
 	$("#currentQuals h4").text("");
 }
 
@@ -93,7 +94,7 @@ function nextApplicant(){ //Runs on "Next Employee" click
 	//Gets the next qualification (if not finished with turn)
 	if(currentPlayer < numPlayers){
 		$("#currentQuals h3").text("Applicant: " + pName(currentPlayer));
-		quickAnim("#currentQuals h3", "bounce");
+		//quickAnim("#currentQuals h3", "bounce");
 		nextQual();
 		return;
 	}
