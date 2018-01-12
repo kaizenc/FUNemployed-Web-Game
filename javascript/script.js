@@ -93,6 +93,7 @@ function nextApplicant(){ //Runs on "Next Employee" click
 	//Gets the next qualification (if not finished with turn)
 	if(currentPlayer < numPlayers){
 		$("#currentQuals h3").text("Applicant: " + pName(currentPlayer));
+		quickAnim("#currentQuals h3", "bounce");
 		nextQual();
 		return;
 	}
@@ -124,7 +125,7 @@ function setupPickWinner(){ //Runs when all applicants have interviewed
 function pickedWinner(winner){ //Runs when a winner is picked
 	//Displays winner text
 	var string = winner + " is the new ";
-	string+=$("#GamePage h2:first").text().slice(8);
+	string+=$("#GamePage h2:first").text().slice(7);
 	string+="!";
 	$("#ScorePage h1").text(string);
 	//Increments Score
