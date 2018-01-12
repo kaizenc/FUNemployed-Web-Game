@@ -3,10 +3,9 @@ function animateTitle(){
 	$('#MainPage .boxes').hide();
 	$('#MainPage .startgame').hide();
 	quickAnim("#MainPage .title", "zoomIn");
-	setTimeout("quickAnim('#MainPage .select', 'zoomIn')", 400);
-	setTimeout("quickAnim('#MainPage .boxes', 'zoomIn')", 800);
-	setTimeout("quickAnim('#MainPage .startgame', 'zoomIn')", 1200);
-
+	setTimeout(quickAnim, 400, '#MainPage .select', 'zoomIn',);
+	setTimeout(quickAnim, 800, '#MainPage .boxes', 'zoomIn',);
+	setTimeout(quickAnim, 1200, '#MainPage .startgame', 'zoomIn');
 }
 
 function quickAnim(selector, animName) {
@@ -21,19 +20,22 @@ function quickAnimHide(selector, animName) {
   });
 };
 
-function changeForm2(){ //Displays correct number of fields for correct number of players
+function changeForm2(){ //Displays correct number of fields for correct number of players + animations!
 	var selector = $("#numOfPlayers").val();
-	var timezz = 100;
-	for(i=0;i<10;i++){
-		nSelector = "input[name='pName" + i + "']";
-		if(i<selector){
-			if(!$(nSelector).is(":visible")){
-				quickAnim(nSelector, 'zoomIn');
-			}
-		}else{
-			if($(nSelector).is(":visible")){
-				quickAnimHide(nSelector, 'zoomOut');
-			}
+	var timeoutCount = 100;
+	for(i=0;i<selector;i++){
+		var nSelector = "input[name='pName" + i + "']";
+		if(!$(nSelector).is(":visible")){
+			setTimeout(quickAnim, timeoutCount, nSelector, 'zoomIn');
+			timeoutCount += 100;
+		}
+	}
+	timeoutCount=100;
+	for(i=9;i>selector-1;i--){
+		var nSelector = "input[name='pName" + i + "']";
+		if($(nSelector).is(":visible")){
+			setTimeout(quickAnimHide, timeoutCount, nSelector, 'zoomOut');
+			timeoutCount +=100;
 		}
 	}
 }
