@@ -6,6 +6,9 @@
   margin: 0px auto;
 }
 
+#HowTo .paragraph{
+	text-align: left;
+}
 #GamePage #currentQuals h2{
 	color: red;
 }

@@ -36,6 +36,15 @@ function startGame(){ //Sets up scores dictionary, displays game
 	roundStart();
 }
 
+function howTo(){
+	quickAnimHide("#MainPage", "fadeOutLeft");
+	setTimeout(quickAnim, 1000, "#HowTo", "fadeInLeft");
+}
+function goBack(){
+	quickAnimHide("#HowTo", "fadeOutLeft");
+	setTimeout(quickAnim, 1000, "#MainPage", "fadeInLeft");
+}
+
 function roundStart(){ //Sets up the html
 	roundStartAnim();
 	var bossName = pName(currentBoss);
@@ -167,19 +176,3 @@ function endGame(){ //Runs on End Game click
 	currentPlayer=1;
 	setTimeout(quickAnim, 1000, '#MainPage', 'fadeInDown');
 }
- 
-
-
-/****How a Turn Works
-One player is picked to be the job
-One of the other players is picked to be the current job...person
-Pick up to 4 qualifications at a time
-Job picks a winner
-then loop back
-Have either an end button or a number of rounds
-
-Turn will be saved in a function
-#rounds is a for loop
-end button is a while loop and a thing
-write a reset function as well
-*/

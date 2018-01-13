@@ -43,7 +43,22 @@
 		<input type="text" name="pName8" placeholder="Player Name 9" style="display:none"><br>
 		<input type="text" name="pName9" placeholder="Player Name 10" style="display:none"><br></div>
 		<div class="startgame"><button onclick="startGame();">Start Game</button></div>
-		<div class="howPlay" href="#"><a>How do I play?</a></div>
+		<div class="howPlay" href="#"><a onclick="howTo();">How do I play?</a></div>
+	</div>
+
+	<div id="HowTo" class="flex-container" style="display:none; padding-top: 50px">
+		<div class="title"><h1>Welcome to <br>FUNemployed</h1></div>
+		<div class="paragraph"><h5>The first player is chosen to start the game as the Employer. Everyone else starts as an Applicant.
+			The Applicants get 4 qualifications each. <br><br>
+
+			Starting to the left of the Employer, each Applicant “interviews” by explaining why their qualifications make
+			them the best fit for the Job. Applicants reveal their qualifications to the Employer, one at a time, and
+			describe how each one makes them qualified for the Job. Because these qualifications are chosen at random and not revealed
+			to the player until they are chosen, the applicants have to think on their feet. <br><br>
+
+			After all Applicants have had a turn, the Employer chooses which Applicant they feel is the most qualified and
+			the Applicant gets a point. A new employer is chosen and the cycle begins again.</h5></div>
+			<div class="goback"><button onclick="goBack();">Go Back</button></div>
 	</div>
 
 
