@@ -64,7 +64,7 @@ function animateTitle(){
 }
 function roundStartAnim(){
 	setTimeout(quickAnim, 1100, "#GamePage", "slideInDown");
-	/*
+	
 	$("#GamePage").children().hide();
 	$("#GamePage h1").show();
 	var timeoutCounter = 2100;
@@ -75,7 +75,7 @@ function roundStartAnim(){
 	  		timeoutCounter+=timeoutInterval;
 	  	}
 	});
-	*/
+	
 }
 
 //Animate Helper Functions
